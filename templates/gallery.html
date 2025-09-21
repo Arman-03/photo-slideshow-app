@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery - Photo Slideshow App{% endblock %}
+
+{% block content %}
+<div class="gallery-container">
+    <div class="gallery-header">
+        <h1><i class="fas fa-images"></i> Your Photo Gallery</h1>
+        <p>Select photos to create a slideshow video</p>
+    </div>
+
+    {% if images %}
+        <form id="videoForm" method="POST" action="{{ url_for('create_video') }}">
+            <div class="gallery-controls">
+                <div class="control-group">
+                    <label for="audioSelect">Background Music:</label>
+                    <select id="audioSelect" name="audio_file">
+                        <option value="default.mp3">Default Music</option>
+                        <option value="max.mp3">F1-Du Du Du</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="durationSelect">Duration per Image:</label>
+                    <select id="durationSelect" name="duration">
+                        <option value="2">1 second</option>
+                        <option value="2">2 seconds</option>
+                        <option value="3" selected>3 seconds</option>
+                        <option value="4">4 seconds</option>
+                        <option value="5">5 seconds</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" id="createVideoBtn" disabled>
+                    <i class="fas fa-video"></i> Create Video
+                </button>
+            </div>
+
+            <div class="gallery-grid">
+                {% for image in images %}
+                    <div class="gallery-item">
+                        <input type="checkbox" name="selected_images" value="{{ image.id }}" class="image-checkbox" onchange="updateCreateButton()">
+                        <img src="{{ image.data_uri }}" alt="Uploaded image" loading="lazy">
+                        <form method="POST" action="{{ url_for('delete_image', image_id=image.id) }}" style="display:inline;">
+                            <button type="submit" class="btn-delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </form>
+
+        <form id="deleteForm" method="POST" style="display: none;">
+            <input type="hidden" name="_method" value="DELETE">
+        </form>
+    {% else %}
+        <div class="empty-gallery">
+            <i class="fas fa-images"></i>
+            <h3>No photos yet</h3>
+            <p>Upload some photos to get started</p>
+            <a href="{{ url_for('upload') }}" class="btn btn-primary">Upload Photos</a>
+        </div>
+    {% endif %}
+</div>
+
+<div id="loadingModal" class="loading-modal" style="display:none;">
+    <div class="loading-content">
+        <i class="fas fa-spinner fa-spin fa-3x"></i>
+        <p id="loadingText">Cooking up your slideshow... 🧑‍🍳</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/gallery.js') }}"></script>
+{% endblock %}

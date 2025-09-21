@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if mode == 'register' %}Register{% else %}Login{% endif %} - Photo Slideshow App
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2>
+                {% if mode == 'register' %}
+                    <i class="fas fa-user-plus"></i> Create Account
+                {% else %}
+                    <i class="fas fa-sign-in-alt"></i> Welcome Back
+                {% endif %}
+            </h2>
+            <p>
+                {% if mode == 'register' %}
+                    Join us to start creating amazing photo slideshows
+                {% else %}
+                    Sign in to your account to continue
+                {% endif %}
+            </p>
+        </div>
+
+        <form class="auth-form" method="POST">
+            {% if mode == 'register' %}
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+            {% endif %}
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-full">
+                {% if mode == 'register' %}Create Account{% else %}Sign In{% endif %}
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            {% if mode == 'register' %}
+                <p>Already have an account? <a href="{{ url_for('login') }}">Sign in here</a></p>
+            {% else %}
+                <p>Don't have an account? <a href="{{ url_for('register') }}">Create one here</a></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

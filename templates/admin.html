@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Photo Slideshow App{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1><i class="fas fa-cog"></i> Admin Dashboard</h1>
+        <p>System overview and user management</p>
+    </div>
+
+    <div class="admin-stats">
+        <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <div class="stat-info">
+                <h3>{{ user_count }}</h3>
+                <p>Total Users</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-images"></i>
+            <div class="stat-info">
+                <h3>{{ photo_count }}</h3>
+                <p>Total Photos</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-server"></i>
+            <div class="stat-info">
+                <h3>Online</h3>
+                <p>System Status</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-content">
+        <h2>User Management</h2>
+        <div class="users-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Joined</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else 'N/A' }}</td>
+                            <td>
+                                <button class="btn-small btn-secondary">View</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

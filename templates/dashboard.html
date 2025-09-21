@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Photo Slideshow App{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Welcome back, {{ user.name }}!</h1>
+        <p>Ready to create your next amazing slideshow?</p>
+    </div>
+
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <i class="fas fa-images"></i>
+            <div class="stat-info">
+                <h3>{{ photo_count }}</h3>
+                <p>Photos Uploaded</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-video"></i>
+            <div class="stat-info">
+                <h3>{{ video_count }}</h3>
+                <p>Videos Created</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-clock"></i>
+            <div class="stat-info">
+                <h3>Active</h3>
+                <p>Account Status</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-actions">
+        <div class="action-grid">
+            <a href="{{ url_for('upload') }}" class="action-card">
+                <i class="fas fa-upload"></i>
+                <h3>Upload Photos</h3>
+                <p>Add new images to your collection</p>
+            </a>
+            <a href="{{ url_for('gallery') }}" class="action-card">
+                <i class="fas fa-images"></i>
+                <h3>View Gallery</h3>
+                <p>Browse and manage your photos</p>
+            </a>
+            <a href="{{ url_for('gallery') }}" class="action-card">
+                <i class="fas fa-video"></i>
+                <h3>Create Video</h3>
+                <p>Turn your photos into a slideshow</p>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

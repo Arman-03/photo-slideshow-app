@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Photo Slideshow App{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Create Amazing Photo Slideshows</h1>
+        <p class="hero-subtitle">Transform your photos into beautiful videos with background music and smooth transitions</p>
+        
+        <div class="hero-features">
+            <div class="feature">
+                <i class="fas fa-upload"></i>
+                <h3>Easy Upload</h3>
+                <p>Drag and drop multiple images at once</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-music"></i>
+                <h3>Add Music</h3>
+                <p>Choose from our audio library or upload your own</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-video"></i>
+                <h3>HD Videos</h3>
+                <p>Export high-quality MP4 videos ready to share</p>
+            </div>
+        </div>
+
+        <div class="hero-actions">
+            {% if user_logged_in %}
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+                <a href="{{ url_for('upload') }}" class="btn btn-secondary">Start Creating</a>
+            {% else %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started</a>
+                <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="demo-section">
+    <div class="container">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Upload Photos</h3>
+                <p>Select and upload your favorite images</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Customize</h3>
+                <p>Choose music, set timing, and arrange photos</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Export</h3>
+                <p>Download your finished slideshow video</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Photos - Photo Slideshow App{% endblock %}
+
+{% block content %}
+<div class="upload-container">
+    <div class="upload-header">
+        <h1><i class="fas fa-upload"></i> Upload Your Photos</h1>
+        <p>Drag and drop your images or click to browse</p>
+    </div>
+
+    <form id="uploadForm" method="POST">
+        <div class="upload-zone" id="uploadZone">
+            <div class="upload-content">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Drop your images here</h3>
+                <p>or <span class="upload-browse">browse files</span></p>
+                <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+            </div>
+        </div>
+
+        <div class="upload-preview" id="uploadPreview" style="display: none;">
+            <h3>Selected Images</h3>
+            <div class="preview-grid" id="previewGrid"></div>
+            <div class="upload-actions">
+                <button type="button" class="btn btn-secondary" onclick="clearImages()">Clear All</button>
+                <button type="submit" class="btn btn-primary">Upload Images</button>
+            </div>
+        </div>
+
+        <input type="hidden" name="data" id="imageData">
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Video Player - Photo Slideshow App{% endblock %}
+
+{% block content %}
+<div class="video-container">
+    <div class="video-header">
+        <h1><i class="fas fa-play-circle"></i> Your Slideshow Video</h1>
+        <p>Your video has been created successfully!</p>
+    </div>
+
+    <div class="video-player">
+        <video controls width="100%" height="auto">
+            <source src="{{ url_for('static', filename='videos/' + video_filename) }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="video-actions">
+        <a href="{{ url_for('static', filename='videos/' + video_filename) }}" download="{{ video_filename }}" class="btn btn-primary">
+            <i class="fas fa-download"></i> Download Video
+        </a>
+        <a href="{{ url_for('gallery') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Gallery
+        </a>
+        <a href="{{ url_for('upload') }}" class="btn btn-secondary">
+            <i class="fas fa-plus"></i> Create Another
+        </a>
+    </div>
+</div>
+{% endblock %}

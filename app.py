@@ -478,5 +478,9 @@ def logout():
     flash("Logged out successfully.", "info")
     return redirect(url_for('index'))
 
+@app.route('/health')
+def health():
+    return "OK", 200
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
